@@ -1,7 +1,8 @@
 package vn.bigo.firstsession;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class ThreeBearAndGame {
 	
@@ -10,23 +11,35 @@ public class ThreeBearAndGame {
 	
 	
 	public static void main(String[] args) {
-		System.out.println(calculateMinutesWatching(Arrays.asList(7, 20, 88)));
-		//35
+    	Scanner argumentScanner = new Scanner(System.in);
+    	
+    	int numberOfInterestingMinutes = argumentScanner.nextInt();
+    	
+    	List<Integer> interestingMinutes = new ArrayList<Integer>(numberOfInterestingMinutes);
+    	
+    	for (int i = 0; i < numberOfInterestingMinutes; i++) {
+    		interestingMinutes.add(argumentScanner.nextInt());
+    	}
+    	
+    	argumentScanner.close();
+    	
+    	System.out.println(calculateMinutesWatching(interestingMinutes));
 	}
 	
-	public static int calculateMinutesWatching(List<Integer> interestingMinuteFlag) {
-		int i = 0;
-		
+	public static int calculateMinutesWatching(List<Integer> interestingMinutes) {	
 		int currentMinute = 0;
-		int nextInterestingMinute = interestingMinuteFlag.get(0);
 		
-		while (i < interestingMinuteFlag.size()) {
+		for (int nextInterestingMinute : interestingMinutes) {
 			if (nextInterestingMinute - currentMinute > CONTINIOUS_BORING_MINUTES_WILL_TURN_OFF) {
-				
+				return currentMinute + CONTINIOUS_BORING_MINUTES_WILL_TURN_OFF;
 			}
-			
-			i++;
+			currentMinute = nextInterestingMinute;
 		}
 		
+		if (MINUTES_GAME_LAST - currentMinute > CONTINIOUS_BORING_MINUTES_WILL_TURN_OFF) {
+			return currentMinute + CONTINIOUS_BORING_MINUTES_WILL_TURN_OFF;
+		}
+		
+		return MINUTES_GAME_LAST;
 	}
 }
