@@ -1,7 +1,6 @@
 package complexity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
@@ -24,36 +23,58 @@ public class Array {
 		
 		Array solution = new Array(numbers, k);
 		
-		solution.printSegment();
+		Founded answer = solution.printSegment(0, numbers.size() - 1);
+		
+		if (answer == null) {
+			System.out.println("-1 -1");
+			return;
+		}
+		
+		System.out.println((answer.from + 1) + " " + (answer.to + 1));
 	}
 	
 	List<Integer> numbers;
 	int k;
+	
+	private class Founded {
+		int from;
+		int to;
+		
+		Founded(int from, int to) {
+			this.from = from;
+			this.to = to;
+		}
+	}
 	
 	Array(List<Integer> numbers, int k) {
 		this.numbers = new ArrayList<>(numbers);
 		this.k = k;
 	}
 	
-	public void printSegment() {
-		for (int i = k; i <= numbers.size(); i++) {
-			int from = 0;
-			int to = k - 1;
-			while (to < numbers.size()) {
+	public Founded printSegment(int from, int to) {
+		if (to - from + 1 < k) {
+			return null;
+		}
 		
-				Set<Integer> set = new HashSet<>();
-				for (int j = from; j <= to; j++) {
-					set.add(numbers.get(j));
-				}
-				
-				if (set.size() == k) {
-					System.out.println((from + 1) + " " + (to + 1));
-					return;
-				}
-				from++;
-				to++;
+		Set<Integer> set = new HashSet<>();
+		
+		for (int i = from; i <= to; i++) {
+			set.add(numbers.get(i));
+		}
+
+		if (set.size() >= k) {
+			Founded right = printSegment(from, to - 1);
+			Founded left = printSegment(from + 1, to);
+			if (right != null) {
+				return right;
+			}
+			if (left != null) {
+				return left;
+			}
+			if (set.size() == k) {
+				return new Founded(from, to);
 			}
 		}
-		System.out.println("-1 -1");
+		return null;
 	}
 }
