@@ -23,58 +23,50 @@ public class Array {
 		
 		Array solution = new Array(numbers, k);
 		
-		Founded answer = solution.printSegment(0, numbers.size() - 1);
-		
-		if (answer == null) {
-			System.out.println("-1 -1");
-			return;
-		}
-		
-		System.out.println((answer.from + 1) + " " + (answer.to + 1));
+		solution.printSegment();
 	}
+	
 	
 	List<Integer> numbers;
 	int k;
-	
-	private class Founded {
-		int from;
-		int to;
-		
-		Founded(int from, int to) {
-			this.from = from;
-			this.to = to;
-		}
-	}
 	
 	Array(List<Integer> numbers, int k) {
 		this.numbers = new ArrayList<>(numbers);
 		this.k = k;
 	}
 	
-	public Founded printSegment(int from, int to) {
-		if (to - from + 1 < k) {
-			return null;
-		}
-		
-		Set<Integer> set = new HashSet<>();
-		
-		for (int i = from; i <= to; i++) {
-			set.add(numbers.get(i));
+	public void printSegment() {
+		Set<Integer> set = new HashSet<>(numbers);
+		if (set.size() < k) {
+			System.out.println("-1 -1");
+			return;
 		}
 
-		if (set.size() >= k) {
-			Founded right = printSegment(from, to - 1);
-			Founded left = printSegment(from + 1, to);
-			if (right != null) {
-				return right;
-			}
-			if (left != null) {
-				return left;
-			}
+		
+		int from = 0;
+		int to = 0;
+
+		set = new HashSet<>(numbers.subList(from, to + 1));
+
+		while (to < numbers.size()) {
 			if (set.size() == k) {
-				return new Founded(from, to);
+				break;
 			}
+			to++;
+			set.add(numbers.get(to));
 		}
-		return null;
+		
+		from = to;
+		set = new HashSet<>(numbers.subList(from, to + 1));
+		
+		while (from > 0) {
+			if (set.size() == k) {
+				break;
+			}
+			from--;
+			set.add(numbers.get(from));
+		}
+		
+		System.out.println((from + 1) + " " + (to + 1));
 	}
 }
