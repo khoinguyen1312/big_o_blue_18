@@ -14,7 +14,12 @@ public class ThatIsYourQueue {
     	
     	int nextArgument = argumentScanner.nextInt();
     	
+    	int problemCounter = 1;
+    	
     	while (nextArgument != 0) {
+    		System.out.println("Case " + problemCounter + ":");
+    		problemCounter++;
+    		
 	    	int numberOfPatients = nextArgument;
 	    	int sizeOfOrder = argumentScanner.nextInt();
 	    	
@@ -43,7 +48,10 @@ public class ThatIsYourQueue {
 		
 		Queue<Integer> patientsQueue = new LinkedList<>(patients);
 		
-		//push min(numberOfPatient, order.size())
+		/*
+		 * As about memory, 
+		 * push min(numberOfPatient, order.size())
+		 */
 		
 		while (!ordersQueue.isEmpty()) {
 			Character order = ordersQueue.remove();
