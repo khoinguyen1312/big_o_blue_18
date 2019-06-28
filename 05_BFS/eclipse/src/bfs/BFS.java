@@ -2,6 +2,7 @@ package bfs;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -10,13 +11,13 @@ public class BFS {
 	public static void main(String[] args) {
 		List<List<Integer>> graph = Arrays.asList(
 				Arrays.asList(1, 2),
-				Arrays.asList(0, 3),
 				Arrays.asList(0),
-				Arrays.asList(1)
+				Arrays.asList(0),
+				Collections.emptyList()
 			);
-		bfs(0, graph);
-		bfs(0, graph);
-		bfs(0, graph);
+		int[] path = bfs(0, graph);
+		
+		System.out.println(buildDirection(0, 3, path));
 	}
 	
 	public static int[] bfs(int startPoint, List<List<Integer>> graph) {

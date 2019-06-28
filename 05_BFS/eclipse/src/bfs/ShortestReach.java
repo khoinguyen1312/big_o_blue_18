@@ -1,7 +1,6 @@
 package bfs;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -9,27 +8,60 @@ import java.util.Scanner;
 
 public class ShortestReach {
 	public static void main(String[] args) {
-		List<List<Integer>> graph = Arrays.asList(
-				Arrays.asList(1, 2),
-				Arrays.asList(0, 3),
-				Arrays.asList(0),
-				Arrays.asList(1)
-			);
-		bfs(0, graph);
-		bfs(0, graph);
-		bfs(0, graph);
+    	Scanner argumentScanner = new Scanner(System.in);
+    	
+    	int numberOfProblem = argumentScanner.nextInt();
+    	
+    	for (int i = 0; i < numberOfProblem; i++) {
+    		int numberOfNode = argumentScanner.nextInt();
+    		int numberOfEdge = argumentScanner.nextInt();
+    		
+    		List<List<Integer>> graph = new ArrayList<>(numberOfNode);
+    		for (int j = 0; j < numberOfNode; j++) {
+    			graph.add(new ArrayList<>());
+    		}
+    		
+    		for (int j = 0; j < numberOfEdge; j++) {
+    			int left = argumentScanner.nextInt() - 1;
+    			int right = argumentScanner.nextInt() - 1;
+    			
+    			graph.get(left).add(right);
+    			graph.get(right).add(left);
+    		}
+    		
+    		int startingPoint = argumentScanner.nextInt() - 1;
+
+    		printDistance(startingPoint, graph);
+    	}
+    	
+    	argumentScanner.close();
+	}
+
+	private static void printDistance(int startingPoint, List<List<Integer>> graph) {
+		int[] distances = distanceBfs(startingPoint, graph);
+		
+		for (int i = 0; i < distances.length; i++) {
+			if (i != startingPoint) {
+				int distance = distances[i];
+				if (distance == 0) {
+					System.out.println(-1);
+				} else {
+					System.out.println(distances[i] * 6);
+				}
+			}
+		}
 	}
 	
-	public static int[] bfs(int startPoint, List<List<Integer>> graph) {
-		//optimize by calculate distance every time we reach a new point
-		
+	public static int[] distanceBfs(int startPoint, List<List<Integer>> graph) {
 		int numberOfNode = graph.size();
 		
 		int[] path = new int[numberOfNode];
+		int[] distance = new int[numberOfNode];
 		boolean[] visited = new boolean[numberOfNode];
 		
 		for (int i = 0; i < numberOfNode; i++) {
 			path[i] = -1;
+			distance[i] = 0;
 			visited[i] = false;
 		}
 		
@@ -49,33 +81,12 @@ public class ShortestReach {
 					visited[nextPoint] = true;
 					queue.add(nextPoint);
 					path[nextPoint] = currentPoint;
+					distance[nextPoint] = distance[currentPoint] + 1;
 				}
 			}
 		}
 		
 		
-		return path;
-	}
-
-	private static List<Integer> buildDirection(int startPoint, int endPoint, int[] path) {
-		List<Integer> direction = new ArrayList<>();
-		
-		if (path[endPoint] == -1) {
-			return null;
-		}
-		
-		int lookupPoint = endPoint;
-		while (true) {
-			direction.add(lookupPoint);
-			
-			lookupPoint = path[lookupPoint];
-			
-			if (lookupPoint == startPoint) {
-				direction.add(lookupPoint);
-				break;
-			}
-		}
-		
-		return direction;
+		return distance;
 	}
 }
