@@ -55,3 +55,14 @@ Topo sort
 
 # DFS Recursive
     Recursive stop when all are visited
+
+# Usage
+    DFS is effective on solving problem that belong to Tree structure
+    Ex:
+        when finding a way, there only one way to go to one node from root  
+                      1               
+                    / | \             
+                   2  3  6           
+                  / \     \           
+                 4   5     7       
+                                     
