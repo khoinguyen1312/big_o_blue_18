@@ -7,16 +7,22 @@ import java.util.Optional;
 public class GuiltyPrince {
 	public static void main(String[] args) {
 		char[][] matrix = new char[][] {
-			{'.', '.', '.', '.', '#', '.'},
-			{'.', '.', '.', '.', '.', '#'},
-			{'.', '.', '.', '.', '.', '.'},
-			{'.', '.', '.', '.', '.', '.'},
-			{'.', '.', '.', '.', '.', '.'},
-			{'.', '.', '.', '.', '.', '.'},
-			{'.', '.', '.', '.', '.', '.'},
-			{'#', '@', '.', '.', '.', '#'},
-			{'.', '#', '.', '.', '#', '.'}
+			{'.', '#', '.', '.', '.', '.', '.', '.', '.', '.', '.', },
+			{'.', '#', '.', '#', '#', '#', '#', '#', '#', '#', '.', },
+			{'.', '#', '.', '#', '.', '.', '.', '.', '.', '#', '.', },
+			{'.', '#', '.', '#', '.', '#', '#', '#', '.', '#', '.', },
+			{'.', '#', '.', '#', '.', '.', '@', '#', '.', '#', '.', },
+			{'.', '#', '.', '#', '#', '#', '#', '#', '.', '#', '.', },
+			{'.', '#', '.', '.', '.', '.', '.', '.', '.', '#', '.', },
+			{'.', '#', '#', '#', '#', '#', '#', '#', '#', '#', '.', },
+			{'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', },
 		};
+		
+//		char[][] matrix = new char[][] {
+//			{'.', '.', '.'},
+//			{'#', '#', '.'},
+//			{'.', '#', '@'},
+//		};
 		
 		FromMatrixToGraphResult result = FromMatrixToGraph.createInstance().fromLandMatrixToGraph(matrix);
 		
@@ -83,11 +89,11 @@ class FromMatrixToGraph {
 			graph.add(new ArrayList<Integer>());
 		}
 		
-		for (int row = 0; row < landMatrix.length; row++) {
-			for (int col = 0; col < landMatrix[row].length; col++) {
+		for (int row = 0; row < height; row++) {
+			for (int col = 0; col < width; col++) {
 				if (landMatrix[row][col] != '#') {
 					
-					int pointPosition = fromMatrixPositionToListPosition(row, col, height); 	
+					int pointPosition = fromMatrixPositionToListPosition(row, col, width); 	
 					
 					Optional<Point> leftPoint= Point.withPoint(row, col).leftPoint();
 					addPointToGraph(landMatrix, width, graph, pointPosition, leftPoint);
