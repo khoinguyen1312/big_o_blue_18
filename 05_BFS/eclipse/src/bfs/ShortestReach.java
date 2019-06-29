@@ -39,17 +39,21 @@ public class ShortestReach {
 
 	private static void printDistance(int startingPoint, List<List<Integer>> graph) {
 		int[] distances = distanceBfs(startingPoint, graph);
+				
+		List<String> output = new ArrayList<>();
 		
 		for (int i = 0; i < distances.length; i++) {
 			if (i != startingPoint) {
 				int distance = distances[i];
 				if (distance == 0) {
-					System.out.println(-1);
+					output.add(Integer.valueOf(-1).toString());
 				} else {
-					System.out.println(distances[i] * 6);
+					output.add(Integer.valueOf(distances[i] * 6).toString());
 				}
 			}
 		}
+		
+		System.out.println(String.join(" ", output));
 	}
 	
 	public static int[] distanceBfs(int startPoint, List<List<Integer>> graph) {
