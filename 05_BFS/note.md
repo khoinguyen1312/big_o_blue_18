@@ -51,3 +51,46 @@ visited[][]
 
 
 ## Kefa and Park
+BFS tree
+```
+B1: read graph
+B2: cat[]
+B3: BFS(1)
+
+    queue.push(1)
+    while queue note empty
+        u = q.front
+        visited(u) = 1
+        for v in graph(u):
+            if not visisted:
+                if a[v]
+                    cat[v] = cat[v] + 1
+                if cat[v] <= M
+                    if isLeaf(v)
+                        ans += 1
+                    else
+                        queue.push()
+
+def isLeaf(v):
+    return v != root && graph[v].size >= 1
+
+BFS:
+    ...
+    cat[]
+    queue.push(1)
+    while not queue.isEmpty:
+        currentNode = queue.front
+        visited[currentNode] = 1
+
+        for nextNode in graph[currentNode]:
+            if not isCat(nextNode)
+                cat[nextNode] = 0
+            else
+                cat[nextNode] = cat[nextNode] + 1
+                if (cat[nextNode] <= M)
+                    if (isLeaf(nextNode))
+                        answer++
+                    else
+                        queue.push(nextNode)
+
+```
