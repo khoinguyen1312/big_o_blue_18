@@ -1,8 +1,6 @@
 package dfs;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Stack;
@@ -39,62 +37,31 @@ public class Prayatna {
     	argumentScanner.close();
 	}
 
-	
-	public static void test() {
-		List<List<Integer>> graph = Arrays.asList(
-				Collections.emptyList(),
-				Collections.emptyList(),
-				Collections.emptyList()
-			);
-		
-		int count = calculateNeccesaryPersonToMeetGroup(graph);
-
-		System.out.println(count);
-	}
-
 
 	private static int calculateNeccesaryPersonToMeetGroup(List<List<Integer>> graph) {
 		int numberOfPeers = graph.size();
 		
 		boolean[] visited = new boolean[numberOfPeers];
+		int[] path = new int[numberOfPeers];
 		
 		for (int i = 0; i < numberOfPeers; i++) {
 			visited[i] = false;
+			path[i] = -1;
 		}
 		
 		int count = 0;
-		
-		while (!isAllVisitted(visited)) {
-			count++;
-			int notVisited = mostNearestNotVisited(visited);
-			visitedDfs(notVisited, graph, visited);
+
+		for (int i = 0; i < visited.length; i++) {
+			if (!visited[i]) {
+				count++;
+				visitedDfs(i, graph, visited, path);
+			}
 		}
+		
 		return count;
 	}
 	
-	public static int mostNearestNotVisited(boolean[] visited) {
-		for (int i = 0; i < visited.length; i++) {
-			if (!visited[i]) {
-				return i;
-			}
-		}
-		return -1;
-	}
-	
-	public static boolean isAllVisitted(boolean[] visited) {
-		for (boolean visit : visited) {
-			if (!visit) {
-				return false;
-			}
-		}
-		return true;
-	}
-	
-	public static boolean[] visitedDfs(int startingPoint, List<List<Integer>> graph, boolean visited[]) {
-		int numberOfNode = graph.size();
-		
-		int[] path = new int[numberOfNode];
-		
+	public static boolean[] visitedDfs(int startingPoint, List<List<Integer>> graph, boolean visited[], int[] path) {
 		Stack<Integer> stack = new Stack<>();
 		stack.add(startingPoint);
 		visited[startingPoint] = true;
