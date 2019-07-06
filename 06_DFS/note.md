@@ -117,3 +117,22 @@ main()
 
 
 ## Dudu Service Maker
+=> should not use BFS
+    Example:
+        1 2
+        2 4
+        1 3
+        3 4
+```
+DFS(s)                             // O(numberOfPoint + numberOfEdge )
+    visited[s] = 1
+    for v : graph[s]
+        if (visited == 0)
+            isLoopFound = DFS(v)
+            if (isLoopFound)
+                return true
+        else if visited[v] == 1
+            return true
+    visited[s] = 2
+    return false
+```
