@@ -31,3 +31,26 @@ for review in reviews
             if (top.peek < remain.peek)
                 swap(top.peek, remain.peek)
         }
+
+## Monk
+when clone -> re adding all values
+create 3 temp variable for storing, multiply then re-adding to current queue
+
+## Add All
+1 2 3
+
+(1 + 2) + 3
+
+1 + 2 = 3
+(1 + 2) + 3 = 6
+(1 + 2 + 3) + 4 = 10
+...
+
+5 6 7 8
+11  11
+18  15
+26  26
+
+minHeap
+    -> get 2 min from heap
+        a, b -> a + b -> heap.add(a + b)
