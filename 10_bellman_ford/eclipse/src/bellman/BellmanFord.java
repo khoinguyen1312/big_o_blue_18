@@ -20,7 +20,7 @@ public class BellmanFord {
 		}
 	}
 	
-	public final int INF = Integer.MAX_VALUE;
+	public static final int INF = Integer.MAX_VALUE;
 	public List<Edge> graph;
 	public int numberOfNode;
 	public int[] path;

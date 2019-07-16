@@ -44,7 +44,7 @@ public class ExtendedTraffic {
     			querries[j] = argumentScanner.nextInt() - 1;
     		}
     		
-    		System.out.println("Case " + i + ":");
+    		System.out.println("Case " + (i + 1) + ":");
     		
     		for (int querry : querries) {
     			if (solution.dist[querry] == BellmanFordExtendedTraffic.INF || solution.dist[querry] < 3) {
