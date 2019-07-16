@@ -20,20 +20,26 @@ public class BellmanFord {
 		}
 	}
 	
-	private final int INF = Integer.MAX_VALUE;
-	private List<Edge> graph;
-	private int numberOfNode;
-	private int[] path;
-	private int[] dist;
+	public final int INF = Integer.MAX_VALUE;
+	public List<Edge> graph;
+	public int numberOfNode;
+	public int[] path;
+	public int[] dist;
 	
 	public BellmanFord(List<Edge> graph, int numberOfNode) {
 		this.graph = graph;
 		this.numberOfNode = numberOfNode;
 		this.path = new int[numberOfNode];
 		this.dist = new int[numberOfNode];
+		for (int i = 0; i < numberOfNode; i++) {
+			this.path[i] = -1;
+			this.dist[i] = INF;
+		}
 	}
 	
-	public boolean bellmanFord() {
+	public boolean bellmanFord(int startingPoint) {
+		this.dist[startingPoint] = 0;
+		
 		for (int i = 0; i < numberOfNode - 1; i++) {
 			for (int j = 0; j < graph.size(); j++) {
 				int from = graph.get(j).source;
@@ -69,7 +75,7 @@ public class BellmanFord {
 					new Edge(3, 0, -60)
 					),
 				4);
-		System.out.println(solution.bellmanFord());
+		System.out.println(solution.bellmanFord(0));
 		
 
 		solution = new BellmanFord(
@@ -80,6 +86,6 @@ public class BellmanFord {
 					),
 				3);
 
-		System.out.println(solution.bellmanFord());
+		System.out.println(solution.bellmanFord(0));
 	}
 }
