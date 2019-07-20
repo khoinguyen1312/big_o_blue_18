@@ -24,7 +24,7 @@ Office Hoú 9:00 -> 11:30 Chủ Nhật hàng tuần
   11. Floyd-Warshall
   12. Binary Search
   13. Binary Search TRee - Set Map
-  14. Caaus rusc duwx lieuej Trie
+  14. Cau truc du lieu Trie
   15. Minimum Spanning Tree
   16. Disjoint Set Union
   17. Overview & Interview
