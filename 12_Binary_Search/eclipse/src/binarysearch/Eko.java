@@ -22,27 +22,28 @@ public class Eko {
 	}
 	
 	public static int calculateHeight(int[] trees, int requiredWood) {
+		trees = IntStream.of(trees).mapToObj(Integer::valueOf).sorted((v1, v2) -> v2.compareTo(v1)).mapToInt(v -> v).toArray();
+		
 		int maxTreeHeight = IntStream.of(trees).max().getAsInt();
-		int[] woodByHeight = new int[maxTreeHeight + 1];
 		
-		for (int i = 0; i <= maxTreeHeight; i++) {
-			final int cutHeight = i;
-			woodByHeight[maxTreeHeight - i] = 
-					IntStream.of(trees).map(treeHeight -> {
-						if (cutHeight >= treeHeight) {
-							return 0;
-						} 
-						return treeHeight - cutHeight;
-					}).sum();
+		int[] divied = new int[trees.length];
+		
+		for (int i = 0; i < trees.length; i++) {
+			divied[i] = 0;
 		}
 		
-		int resultIndex = Arrays.binarySearch(woodByHeight, requiredWood);
-		
-		if (resultIndex < 0) {
-			int insertPoint = - resultIndex - 1;
-			return maxTreeHeight - insertPoint;
-		} else {
-			return maxTreeHeight - resultIndex;
+		for (int i = 0; i < trees.length; i++) {
+			for (int j = 0; j <= i; j++) {
+				divied[i] += trees[j] - trees[i];
+			}
 		}
+		
+		int upperBound = BinarySearchBound.createInstance(divied, 0, divied.length, requiredWood).findUpperBound();
+		
+		int lowerBound = upperBound - 1;
+		
+		int a = ((requiredWood - divied[lowerBound]) / upperBound);
+		int result = a * upperBound + lowerBound;
+		return result;
 	}
 }
