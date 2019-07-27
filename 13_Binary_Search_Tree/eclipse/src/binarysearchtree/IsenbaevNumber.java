@@ -3,9 +3,13 @@ package binarysearchtree;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Queue;
 import java.util.Set;
+import java.util.TreeMap;
 
 public class IsenbaevNumber {
 	public static void main(String[] args) {
@@ -32,7 +36,7 @@ public class IsenbaevNumber {
 		
 		Map<String, Set<String>> relationship = new HashMap<>();
 
-		for (String name : allPartipant) {
+		for (String name :  allPartipant) {
 			relationship.put(name, new HashSet<>());
 		}
 		
@@ -48,20 +52,51 @@ public class IsenbaevNumber {
 		}
 		
 		Map<String, Integer> result = new HashMap<>();
-		calculate(result, relationship, "Isenbaev", 0);
+		result = bfs("Isenbaev", relationship);
 		
-		System.out.println(result);
+		for (Entry<String, Integer> entry : result.entrySet()) {
+			if (entry.getValue() == null) {
+				System.out.println(entry.getKey() + " undefined");
+			} else {
+				System.out.println(entry.getKey() + " " + entry.getValue());
+			}
+		}
 	}
 	
-	public static void calculate(Map<String, Integer> result, Map<String, Set<String>> relationship, String beingCheck, int counter) {
-		if (result.containsKey(beingCheck)) {
-			return;
+	public static Map<String, Integer> bfs(String startPoint, Map<String, Set<String>> graph) {
+		Map<String, String> path = new HashMap<>();
+		Map<String, Integer> distance = new TreeMap<>();
+		Set<String> visited = new HashSet<String>();
+		
+		for (Entry<String, Set<String>> entry : graph.entrySet()) {
+			distance.put(entry.getKey(), null);
 		}
 		
-		result.put(beingCheck, counter);
 		
-		for (String friend : relationship.get(beingCheck)) {
-			calculate(result, relationship, friend, counter + 1);
+		
+		Queue<String> queue = new LinkedList<>();
+		queue.add(startPoint);
+		
+		path.put(startPoint, "");
+		distance.put(startPoint, 0);
+		visited.add(startPoint);
+		
+		while (!queue.isEmpty()) {
+			String currentPoint = queue.remove();
+			
+			Set<String> nextPoints = graph.get(currentPoint);
+			
+			for (String nextPoint : nextPoints) {				
+				if (!visited.contains(nextPoint)) {
+					visited.add(nextPoint);
+					queue.add(nextPoint);
+					path.put(nextPoint, currentPoint);
+					distance.put(nextPoint, distance.get(currentPoint) + 1);
+				}
+			}
 		}
+		
+		
+		return distance;
 	}
 }
