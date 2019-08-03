@@ -30,7 +30,7 @@ solution.prim(0)
 
 querries = [(start, end), ...]
 for (start, end) in querries:
-    printMaximumCost(solution, start, end) -> recursive or DFS
+    printMaximumCost(solution, start, end) -> recursive or DFS from MST.buildGraph(solution.path)
 
 O( (S logC / Prim) + Q * (C - 1))
 ```
