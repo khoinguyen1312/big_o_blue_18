@@ -5,13 +5,17 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 public class MinimumSpanningTree {
-	public class Node implements Comparable<Node> {
+	public static class Node implements Comparable<Node> {
 		Integer id;
 		Integer dist;
 		
-		public Node(Integer id, Integer dist) {
+		private Node(Integer id, Integer dist) {
 			this.id = id;
 			this.dist = dist;
+		}
+		
+		public static Node createInstance(Integer id, Integer dist) {
+			return new Node(id, dist);
 		}
 		
 		@Override
@@ -58,6 +62,4 @@ public class MinimumSpanningTree {
 			}
 		}
 	}
-	
-	
 }
