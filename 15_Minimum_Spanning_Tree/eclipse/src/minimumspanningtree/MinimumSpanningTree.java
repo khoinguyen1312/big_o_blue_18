@@ -27,6 +27,7 @@ public class MinimumSpanningTree {
 		distance = new int[numberOfNode];
 		path = new int[numberOfNode];
 		visited = new boolean[numberOfNode];
+		priorityQueue = new PriorityQueue<>();
 		
 		Arrays.fill(distance, Integer.MAX_VALUE);
 		Arrays.fill(path, -1);
