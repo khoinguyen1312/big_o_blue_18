@@ -21,24 +21,24 @@ public class Trie {
 	public Trie() {
 		root = new Node();
 	}
-	
-	public List<Node> findWithPrefix(String prefix) {
-		Optional<Node> optionalPrefixNode = findNode(prefix);
-		
-		if (!optionalPrefixNode.isPresent()) {
-			return Collections.emptyList();
-		}
-		
-		Node prefixNode = optionalPrefixNode.get();
-		List<Node> nodeBelongToPrefix = new ArrayList<>();
-		
-		addIfIsNode(prefixNode, nodeBelongToPrefix);
-	}
-	
-	private void addIfIsNode(Node prefixNode, List<Node> result) {
-		f
-	}
-	
+//	
+//	public List<Node> findWithPrefix(String prefix) {
+//		Optional<Node> optionalPrefixNode = findNode(prefix);
+//		
+//		if (!optionalPrefixNode.isPresent()) {
+//			return Collections.emptyList();
+//		}
+//		
+//		Node prefixNode = optionalPrefixNode.get();
+//		List<Node> nodeBelongToPrefix = new ArrayList<>();
+//		
+//		addIfIsNode(prefixNode, nodeBelongToPrefix);
+//	}
+//	
+//	private void addIfIsNode(Node prefixNode, List<Node> result) {
+//		f
+//	}
+//	
 	public void addWord(String s, int count) {
 		int ch;
 		Node temp = root;
