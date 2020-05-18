@@ -30,3 +30,11 @@ Sum and all number -> if exist remaining only 1 number in binary
 Non-DAG still able to solve
 
 Topological Sort by DFS from main course
+
+
+## Backtracking
+
+### Minimize Absolute Difference
+Phương pháp nhánh cận 
+
+## Divide and Conquer
