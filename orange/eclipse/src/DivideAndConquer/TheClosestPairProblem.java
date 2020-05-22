@@ -23,7 +23,7 @@ public class TheClosestPairProblem {
 				points.add(point);
 			}
 			
-			double min = closestPair(points, 0, n-1); 
+			double min = closestPair(points, 0, n - 1); 
 			if (min < 10000.0) {
 				System.out.println(String.format("%.4f", min));
 			} else {

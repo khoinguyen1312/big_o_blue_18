@@ -38,3 +38,14 @@ Topological Sort by DFS from main course
 Phương pháp nhánh cận 
 
 ## Divide and Conquer
+
+### Distance in Tree
+
+Chọn đỉnh gốc
+
+Tính đường đi từ đỉnh gốc đến các `cây` con
+
+Đường đi từ cây con đến cây con
+
+Fill the Containers & Tree Summing không giải bằng Divide and Conquer
+=> Binary Search minContainer(K) -> trả về số lượng containner ít nhất với dung tích K
