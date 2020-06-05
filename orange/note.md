@@ -51,3 +51,5 @@ Fill the Containers & Tree Summing không giải bằng Divide and Conquer
 => Binary Search minContainer(K) -> trả về số lượng containner ít nhất với dung tích K
 
 ## Big Table
+
+## Dynamic Programming
